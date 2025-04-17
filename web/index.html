@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finance News Bot</title>
+</head>
+<body>
+  <h1>Finance News Bot</h1>
+  <textarea id="input" rows="4" cols="50" placeholder="Type something…"></textarea><br>
+  <button id="btn">Send</button>
+  <h2>Response:</h2>
+  <pre id="out"></pre>
+
+  <script>
+    document.getElementById("btn").onclick = async () => {
+      const text = document.getElementById("input").value;
+      const res = await fetch("http://localhost:8000/echo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
+      });
+      const data = await res.json();
+      document.getElementById("out").textContent = data.echo;
+    };
+  </script>
+</body>
+</html>
